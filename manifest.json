@@ -1,0 +1,22 @@
+{
+   "background": {
+        "scripts": [ "js/jquery-1.9.0.min.js", "js/background.js" ]
+   },
+   "browser_action": {
+        "default_icon": "img/icon32.png",
+        "default_title": "View Playerlist",
+        "default_popup": "popup.html"
+   },
+   "icons": {
+      "16": "img/icon16.png",
+      "32": "img/icon32.png",
+      "48": "img/icon48.png",
+      "128": "img/icon128.png"
+   },
+   "options_page": "options.html",
+   "description": "View Banxsi.com Minecraft Status and Playerlist",
+   "manifest_version": 2,
+   "name": "Banxsi Status",
+   "permissions": [ "notifications", "storage" ],
+   "version": "0.2.1"
+}

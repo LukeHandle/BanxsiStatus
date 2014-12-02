@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BanxsiAlert Options</title>
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
+        <style>
+        .text-center {
+          text-align: center;
+        }
+        .panel-body {
+            padding: 0 15px;
+        }
+        #mc-info {
+            width: 250px;
+            margin: 0;
+        }
+        #mc-info .h3, #mc-info .h4 {
+            margin-top: 0;
+        }
+        #mc-info_header {
+            height: 45px;
+            padding: 0;
+        }
+        #mc-info_msg p, #mc-info_header h1 {
+            margin: 0;
+        }
+        #sPlayersOnline {
+            font-size: 25px;
+        }
+        #mc-info_body {
+            height: 288px;
+        }
+        #dPlayerlist {
+            height: inherit;
+        }
+        #mc-info_footer {
+            height: 40px;
+        }
+        #dPlayerlist {
+            margin: 0 -15px;
+            overflow: auto;
+        }
+        a.list-group-item > .badge {
+            color: #ffffff;
+            background-color: #428bca;
+        }
+        </style>
+        <script src="./js/jquery-1.9.0.min.js"></script>
+        <script src="./js/popup.js"></script>
+    </head>
+    <body>
+        <div id="mc-info" class="panel panel-info">
+            <div id="mc-info_header" class="panel-heading text-center">
+                <h1>Status: <span id="sStatus">LOADING</span> <span id="sPlayersOnline" class="badge"></span></h1>
+            </div>
+            <div id="mc-info_msg" class="panel-body text-center">
+                <p id="pMessage"></p>
+            </div>
+            <div id="mc-info_body" class="panel-body hidden">
+            </div>
+            <div id="mc-info_footer" class="panel-footer text-center">
+                <p id="pUpdated" class="h4">Last Updated: <span id="sUpdated">...</span></p>
+            </div>
+        </div>
+    </body>
+</html>
