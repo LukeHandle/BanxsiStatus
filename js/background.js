@@ -43,7 +43,8 @@ function useMinecraftInfo(minecraftInfo) {
 function getMinecraftInfo() {
     // Put connectivity check here
     if (navigator.onLine) {
-        var requestObj = $.getJSON(banxsiAPI, function(data) {
+        var timeNow = Math.round(Date.now() / 1000);
+        var requestObj = $.getJSON(banxsiAPI + '&t=' + timeNow, function(data) {
             //Add msg client side atm
             data.msg = "";
             useMinecraftInfo(data);
