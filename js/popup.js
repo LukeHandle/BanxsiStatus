@@ -1,8 +1,3 @@
-//var BGPage = chrome.extension.getBackgroundPage();
-//console.log(BGPage.getPlayerData());
-//BGPage.updateMinecraftInfo();
-
-
 function updateMinecraftInfoPanel(data) {
     if (data.status === 'online') {
         $('#mc-info').addClass('panel-success').removeClass('panel-info panel-danger');
@@ -37,18 +32,19 @@ function updateMinecraftInfoPanel(data) {
         $('#mc-info_body').addClass('hidden');
         $('#sPlayersOnline').text('');
     }
-    if (data.msg)
+    if (data.msg) {
         $('#pMessage').text(data.msg);
-    var unix = new Date(data.time*1000);
-    var time = ("0" + unix.getHours()).slice(-2) + ':' + ("0" + unix.getMinutes()).slice(-2) + ':' +("0" + unix.getSeconds()).slice(-2);
+    }
+    var unix = new Date(data.time * 1000),
+        time = ("0" + unix.getHours()).slice(-2) + ':' + ("0" + unix.getMinutes()).slice(-2) + ':' + ("0" + unix.getSeconds()).slice(-2);
     $('#pUpdated').remove();
     $('#mc-info_footer').append('<p id="pUpdated" class="h4">Last Updated: <span id="sUpdated">' + time + '</span></p>');
-    
 }
 
 chrome.runtime.sendMessage({requestUpdate: true});
 
-chrome.runtime.onMessage.addListener(function(request) {
-    if (request.sendUpdate === true)
+chrome.runtime.onMessage.addListener(function (request) {
+    if (request.sendUpdate === true) {
         updateMinecraftInfoPanel(request.data);
+    }
 });

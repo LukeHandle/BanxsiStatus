@@ -18,11 +18,11 @@ function save_options() {
         'notificationEnableStatus': notificationEnableStatus,
         'notificationEnablePlayers': notificationEnablePlayers,
         'notificationPlayerList': notificationPlayerList
-    }, function() {
+    }, function () {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
         status.textContent = 'Options saved.';
-        setTimeout(function() {
+        setTimeout(function () {
             status.textContent = '';
         }, 1000);
     });
@@ -39,7 +39,7 @@ function restore_options() {
         'notificationEnableStatus': false,
         'notificationEnablePlayers': false,
         'notificationPlayerList': 'Banxsi, externo6, LukeHandle'
-    }, function(items) {
+    }, function (items) {
         document.getElementById('checkFrequency').value = items.checkFrequency;
         document.getElementById('notificationEnable').checked = items.notificationEnable;
         document.getElementById('notificationTimeout').value = items.notificationTimeout;
@@ -51,7 +51,7 @@ function restore_options() {
 document.addEventListener('DOMContentLoaded', restore_options);
 
 
-sels = $('.form-control');
-for(i=0; i<sels.length; i++) {
+var sels = $('.form-control');
+for (var i = 0; i < sels.length; i++) {
     sels[i].addEventListener('change', save_options);
 }

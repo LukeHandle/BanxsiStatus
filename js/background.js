@@ -1,5 +1,6 @@
 // Load Variables
-var banxsiAPI = 'http://banxsi.com/api/minecraftstatus?extension=' + chrome.app.getDetails().version;
+var banxsiAPI = 'http://banxsi.com/api/minecraftstatus?extension=' + chrome.app.getDetails().version,
+    timerId = null;
 
 function loadOptions() {
     chrome.storage.local.get({
@@ -9,9 +10,11 @@ function loadOptions() {
         'notificationEnableStatus': false,
         'notificationEnablePlayers': false,
         'notificationPlayerList': 'Banxsi, externo6, LukeHandle'
-    }, function(items) {
+    }, function (items) {
         console.info('Loading in Options');
+        console.debug(items);
         window.options = items;
+        clearTimeout(timerId);
         updateMinecraftInfo();
     });
 }
@@ -41,18 +44,15 @@ function useMinecraftInfo(minecraftInfo) {
 }
 
 function getMinecraftInfo() {
-    // Put connectivity check here
     if (navigator.onLine) {
-        var timeNow = Math.round(Date.now() / 1000);
-        var requestObj = $.getJSON(banxsiAPI + '&t=' + timeNow, function(data) {
-            //Add msg client side atm
-            data.msg = "";
-            useMinecraftInfo(data);
-        }).fail( function(d, textStatus, error) {
-            console.warn("getJSON failed, status: " + textStatus + ", error: "+error);
-            sendError('unavailable', 'Could not connect to Banxsi.com', 'ERR', '#FF0000');
-        });
-        setTimeout(function(){requestObj.abort("timeout"); }, 5000);
+        var timeNow = Math.round(Date.now() / 1000),
+            requestObj = $.getJSON(banxsiAPI + '&rf=' + window.options.checkFrequency + '&t=' + timeNow, function (data) {
+                useMinecraftInfo(data);
+            }).fail(function (d, textStatus, error) {
+                console.warn("getJSON failed, status: " + textStatus + ", error: " + error);
+                sendError('unavailable', 'Could not connect to Banxsi.com', 'ERR', '#FF0000');
+            });
+        setTimeout(function () {requestObj.abort("timeout"); }, 5000);
     } else {
         console.warn("We appear to be Offline");
         sendError('noconnection', 'We appear to be Offline', 'N/C', '#FFFF00');
@@ -60,23 +60,24 @@ function getMinecraftInfo() {
 }
 
 function updateMinecraftInfo() {
-    if(window.options.checkFrequency !== '0') {
+    if (window.options.checkFrequency !== '0') {
         getMinecraftInfo();
         timerId = setTimeout(updateMinecraftInfo, window.options.checkFrequency);
     }
 }
 
-chrome.runtime.onMessage.addListener(function(request) {
+chrome.runtime.onMessage.addListener(function (request) {
     if (request.requestUpdate === true) {
-        console.debug('requested update');
-        if (typeof window.minecraftInfo === 'undefined')
+        console.debug('Popover has requested update');
+        if (typeof window.minecraftInfo === 'undefined') {
             window.minecraftInfo = {time: 0};
-        timeData = window.minecraftInfo.time;
-        var timeNow = Math.round(Date.now() / 1000);
+        }
+        var timeData = window.minecraftInfo.time,
+            timeNow = Math.round(Date.now() / 1000);
         if (timeData + 15 <= timeNow) {
             // Send the cached data
             chrome.runtime.sendMessage({sendUpdate: true, data: window.minecraftInfo});
-            // The data is older than 15 second, force a re-check irrelvant of the frequency set in options
+            // The data is older than 15 second, force a re-check irrelevant of the frequency set in options
             console.debug('requestUpdate for new data. Time Data: ' + timeData + ', Time Now: ' + timeNow + ', Difference: ' + (timeNow - timeData));
             getMinecraftInfo();
         } else {
@@ -87,7 +88,7 @@ chrome.runtime.onMessage.addListener(function(request) {
     }
 });
 
-chrome.storage.onChanged.addListener(function() {
+chrome.storage.onChanged.addListener(function () {
     loadOptions();
 });
 

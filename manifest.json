@@ -16,7 +16,7 @@
    "options_page": "options.html",
    "description": "View Banxsi.com Minecraft Status and Playerlist",
    "manifest_version": 2,
-   "name": "Banxsi Status",
+   "name": "BanxsiStatus",
    "permissions": [ "notifications", "storage" ],
    "version": "0.2.1"
 }
