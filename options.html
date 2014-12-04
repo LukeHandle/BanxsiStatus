@@ -33,11 +33,15 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="alertEnable" class="control-label">Enable Alert Sound</label>
+            <input type="checkbox" class="form-control" name="alertEnable" id="alertEnable">
+        </div>
+        <div class="form-group">
             <label for="notificationEnable" class="control-label">Enable Notifications</label>
             <input type="checkbox" class="form-control" name="notificationEnable" id="notificationEnable">
         </div>
         <fieldset>
-            <legend>Notifications</legend>
+            <legend>Notifications/Alerts</legend>
             <div class="form-group">
                 <label for="notificationTimeout" class="control-label">Timeout for Notifications</label>
                 <select class="form-control" name="notificationTimeout" id="notificationTimeout">
@@ -49,11 +53,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="notificationEnableStatus" class="control-label">Enable Notications for Status Alerts</label>
+                <label for="notificationEnableStatus" class="control-label">Enabled for Status Alerts</label>
                 <input type="checkbox" class="form-control" name="notificationEnableStatus" id="notificationEnableStatus">
             </div>
             <div class="form-group">
-                <label for="notificationEnablePlayers" class="control-label">Enable Notications for Playerlist</label>
+                <label for="notificationEnablePlayers" class="control-label">Enabled for Playerlist</label>
                 <input type="checkbox" class="form-control" name="notificationEnablePlayers" id="notificationEnablePlayers">
             </div>
             <div class="form-group">

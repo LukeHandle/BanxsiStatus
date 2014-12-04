@@ -7,6 +7,7 @@
 function save_options() {
     var checkFrequency = document.getElementById('checkFrequency').value,
         notificationEnable = document.getElementById('notificationEnable').checked,
+        alertEnable = document.getElementById('alertEnable').checked,
         notificationTimeout = document.getElementById('notificationTimeout').value,
         notificationEnableStatus = document.getElementById('notificationEnableStatus').checked,
         notificationEnablePlayers = document.getElementById('notificationEnablePlayers').checked,
@@ -14,6 +15,7 @@ function save_options() {
     chrome.storage.local.set({
         'checkFrequency': checkFrequency,
         'notificationEnable': notificationEnable,
+        'alertEnable': alertEnable,
         'notificationTimeout': notificationTimeout,
         'notificationEnableStatus': notificationEnableStatus,
         'notificationEnablePlayers': notificationEnablePlayers,
@@ -35,6 +37,7 @@ function restore_options() {
     chrome.storage.local.get({
         'checkFrequency': 15000,
         'notificationEnable': false,
+        'alertEnable': false,
         'notificationTimeout': 30000,
         'notificationEnableStatus': false,
         'notificationEnablePlayers': false,
@@ -42,6 +45,7 @@ function restore_options() {
     }, function (items) {
         document.getElementById('checkFrequency').value = items.checkFrequency;
         document.getElementById('notificationEnable').checked = items.notificationEnable;
+        document.getElementById('alertEnable').checked = items.alertEnable;
         document.getElementById('notificationTimeout').value = items.notificationTimeout;
         document.getElementById('notificationEnableStatus').checked = items.notificationEnableStatus;
         document.getElementById('notificationEnablePlayers').checked = items.notificationEnablePlayers;

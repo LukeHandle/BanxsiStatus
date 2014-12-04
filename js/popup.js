@@ -34,6 +34,8 @@ function updateMinecraftInfoPanel(data) {
     }
     if (data.msg) {
         $('#pMessage').text(data.msg);
+    } else {
+        $('#pMessage').text('');
     }
     var unix = new Date(data.time * 1000),
         time = ("0" + unix.getHours()).slice(-2) + ':' + ("0" + unix.getMinutes()).slice(-2) + ':' + ("0" + unix.getSeconds()).slice(-2);
